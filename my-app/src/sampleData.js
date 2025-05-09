@@ -47,3 +47,36 @@ export const testWeatherJSON = {
   name: "Province of Turin",
   cod: 200,
 };
+
+export const testPersonArray = [
+  {
+    id: 1,
+    name: "Kalle",
+    age: 34,
+  },
+  {
+    id: 2,
+    name: "Ville",
+    age: 20,
+  },
+  {
+    id: 3,
+    name: "Pekka",
+    age: 66,
+  },
+  {
+    id: 4,
+    name: "Maija",
+    age: 23,
+  },
+  {
+    id: 5,
+    name: "Ossi",
+    age: 11,
+  },
+  {
+    id: 6,
+    name: "Jussi",
+    age: 20,
+  },
+];

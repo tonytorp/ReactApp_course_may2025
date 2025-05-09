@@ -20,12 +20,27 @@ const CurrentWeatherScreen = () => {
   };
 
   const fetchWeatherData = async (city) => {
+    const urlBase = "https://api.openweathermap.org/data/2.5/weather?q=";
+    const urlParameters =
+      "&units=metric&appid=6c433438776b5be4ac86001dc88de74d";
     // 2 sekunnin viive ja parsitaan testidata
     setFetchingData(true);
     // Viive
-    await new Promise((resolve) => setTimeout(resolve, 2000));
-    setFetchingData(false);
-    // Parsitaan data
+    await new Promise((resolve) => setTimeout(resolve, 1500));
+    try {
+      const response = await fetch(urlBase + city + urlParameters);
+      const weatherJSON = await response.json();
+      setFetchingData(false);
+      setCity(weatherJSON.name);
+      // Parsitaan data, päivitetään json -tilatieto
+      setWeatherData({
+        description: weatherJSON.weather[0].main,
+        temperature: weatherJSON.main.temp,
+        windSpeed: weatherJSON.wind.speed,
+      });
+    } catch (e) {
+      console.log(error);
+    }
   };
 
   useEffect(() => {
@@ -40,9 +55,9 @@ const CurrentWeatherScreen = () => {
     <div>
       <Header title={city}></Header>
       <WeatherDisplay
-        description="Sunny"
-        temperature={8}
-        windSpeed={3}
+        description={weatherData.description}
+        temperature={weatherData.temperature}
+        windSpeed={weatherData.windSpeed}
       ></WeatherDisplay>
       <CitySelector updateCity={updateCity}></CitySelector>
     </div>
